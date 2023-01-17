@@ -1,0 +1,291 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+%Possible squares
+%S_row_column
+%S_1_1.
+%S_1_2.
+%S_1_3.
+%S_1_4.
+%S_2_1.
+%S_2_2.
+%S_2_3.
+%S_2_4.
+%S_3_1.
+%S_3_2.
+%S_3_3.
+%S_3_4.
+%S_4_1.
+%S_4_2.
+%S_4_3.
+%S_4_4.
+
+%Possible values: numbers from 1 to 4.
+%Rule: 
+%    different digit on each square of one row
+%    different digit on each square of one column
+%    different digit on each square in a 2x2 square inside the grid.
+
+%At least one digit for each square
+digit(x) -> one(x) | two(x) | three(x) | four(x).
+digit(S_1_1).
+digit(S_1_2).
+digit(S_1_3).
+digit(S_1_4).
+digit(S_2_1).
+digit(S_2_2).
+digit(S_2_3).
+digit(S_2_4).
+digit(S_3_1).
+digit(S_3_2).
+digit(S_3_3).
+digit(S_3_4).
+digit(S_4_1).
+digit(S_4_2).
+digit(S_4_3).
+digit(S_4_4).
+
+%At most one digit for each square
+one(x) -> -two(x) & -three(x) & -four(x).
+two(x) -> -one(x) & -three(x) & -four(x).
+three(x) -> -one(x) & -two(x) & -four(x).
+four(x) -> -one(x) & -two(x) & -three(x).
+
+%Different digit on each square of a row
+one(S_1_1) -> -one(S_1_2) & -one(S_1_3) & -one(S_1_4).
+one(S_1_2) -> -one(S_1_1) & -one(S_1_3) & -one(S_1_4).
+one(S_1_3) -> -one(S_1_1) & -one(S_1_2) & -one(S_1_4).
+one(S_1_4) -> -one(S_1_1) & -one(S_1_2) & -one(S_1_3).
+one(S_2_1) -> -one(S_2_2) & -one(S_2_3) & -one(S_2_4).
+one(S_2_2) -> -one(S_2_1) & -one(S_2_3) & -one(S_2_4).
+one(S_2_3) -> -one(S_2_1) & -one(S_2_2) & -one(S_2_4).
+one(S_2_4) -> -one(S_2_1) & -one(S_2_2) & -one(S_2_3).
+one(S_3_1) -> -one(S_3_2) & -one(S_3_3) & -one(S_3_4).
+one(S_3_2) -> -one(S_3_1) & -one(S_3_3) & -one(S_3_4).
+one(S_3_3) -> -one(S_3_1) & -one(S_3_2) & -one(S_3_4).
+one(S_3_4) -> -one(S_3_1) & -one(S_3_2) & -one(S_3_3).
+one(S_4_1) -> -one(S_4_2) & -one(S_4_3) & -one(S_4_4).
+one(S_4_2) -> -one(S_4_1) & -one(S_4_3) & -one(S_4_4).
+one(S_4_3) -> -one(S_4_1) & -one(S_4_2) & -one(S_4_4).
+one(S_4_4) -> -one(S_4_1) & -one(S_4_2) & -one(S_4_3).
+
+two(S_1_1) -> -two(S_1_2) & -two(S_1_3) & -two(S_1_4).
+two(S_1_2) -> -two(S_1_1) & -two(S_1_3) & -two(S_1_4).
+two(S_1_3) -> -two(S_1_1) & -two(S_1_2) & -two(S_1_4).
+two(S_1_4) -> -two(S_1_1) & -two(S_1_2) & -two(S_1_3).
+two(S_2_1) -> -two(S_2_2) & -two(S_2_3) & -two(S_2_4).
+two(S_2_2) -> -two(S_2_1) & -two(S_2_3) & -two(S_2_4).
+two(S_2_3) -> -two(S_2_1) & -two(S_2_2) & -two(S_2_4).
+two(S_2_4) -> -two(S_2_1) & -two(S_2_2) & -two(S_2_3).
+two(S_3_1) -> -two(S_3_2) & -two(S_3_3) & -two(S_3_4).
+two(S_3_2) -> -two(S_3_1) & -two(S_3_3) & -two(S_3_4).
+two(S_3_3) -> -two(S_3_1) & -two(S_3_2) & -two(S_3_4).
+two(S_3_4) -> -two(S_3_1) & -two(S_3_2) & -two(S_3_3).
+two(S_4_1) -> -two(S_4_2) & -two(S_4_3) & -two(S_4_4).
+two(S_4_2) -> -two(S_4_1) & -two(S_4_3) & -two(S_4_4).
+two(S_4_3) -> -two(S_4_1) & -two(S_4_2) & -two(S_4_4).
+two(S_4_4) -> -two(S_4_1) & -two(S_4_2) & -two(S_4_3).
+
+three(S_1_1) -> -three(S_1_2) & -three(S_1_3) & -three(S_1_4).
+three(S_1_2) -> -three(S_1_1) & -three(S_1_3) & -three(S_1_4).
+three(S_1_3) -> -three(S_1_1) & -three(S_1_2) & -three(S_1_4).
+three(S_1_4) -> -three(S_1_1) & -three(S_1_2) & -three(S_1_3).
+three(S_2_1) -> -three(S_2_2) & -three(S_2_3) & -three(S_2_4).
+three(S_2_2) -> -three(S_2_1) & -three(S_2_3) & -three(S_2_4).
+three(S_2_3) -> -three(S_2_1) & -three(S_2_2) & -three(S_2_4).
+three(S_2_4) -> -three(S_2_1) & -three(S_2_2) & -three(S_2_3).
+three(S_3_1) -> -three(S_3_2) & -three(S_3_3) & -three(S_3_4).
+three(S_3_2) -> -three(S_3_1) & -three(S_3_3) & -three(S_3_4).
+three(S_3_3) -> -three(S_3_1) & -three(S_3_2) & -three(S_3_4).
+three(S_3_4) -> -three(S_3_1) & -three(S_3_2) & -three(S_3_3).
+three(S_4_1) -> -three(S_4_2) & -three(S_4_3) & -three(S_4_4).
+three(S_4_2) -> -three(S_4_1) & -three(S_4_3) & -three(S_4_4).
+three(S_4_3) -> -three(S_4_1) & -three(S_4_2) & -three(S_4_4).
+three(S_4_4) -> -three(S_4_1) & -three(S_4_2) & -three(S_4_3).
+
+four(S_1_1) -> -four(S_1_2) & -four(S_1_3) & -four(S_1_4).
+four(S_1_2) -> -four(S_1_1) & -four(S_1_3) & -four(S_1_4).
+four(S_1_3) -> -four(S_1_1) & -four(S_1_2) & -four(S_1_4).
+four(S_1_4) -> -four(S_1_1) & -four(S_1_2) & -four(S_1_3).
+four(S_2_1) -> -four(S_2_2) & -four(S_2_3) & -four(S_2_4).
+four(S_2_2) -> -four(S_2_1) & -four(S_2_3) & -four(S_2_4).
+four(S_2_3) -> -four(S_2_1) & -four(S_2_2) & -four(S_2_4).
+four(S_2_4) -> -four(S_2_1) & -four(S_2_2) & -four(S_2_3).
+four(S_3_1) -> -four(S_3_2) & -four(S_3_3) & -four(S_3_4).
+four(S_3_2) -> -four(S_3_1) & -four(S_3_3) & -four(S_3_4).
+four(S_3_3) -> -four(S_3_1) & -four(S_3_2) & -four(S_3_4).
+four(S_3_4) -> -four(S_3_1) & -four(S_3_2) & -four(S_3_3).
+four(S_4_1) -> -four(S_4_2) & -four(S_4_3) & -four(S_4_4).
+four(S_4_2) -> -four(S_4_1) & -four(S_4_3) & -four(S_4_4).
+four(S_4_3) -> -four(S_4_1) & -four(S_4_2) & -four(S_4_4).
+four(S_4_4) -> -four(S_4_1) & -four(S_4_2) & -four(S_4_3).
+
+%Different digit on each square of a column
+one(S_1_1) -> -one(S_2_1) & -one(S_3_1) & -one(S_4_1).
+one(S_2_1) -> -one(S_1_1) & -one(S_3_1) & -one(S_4_1).
+one(S_3_1) -> -one(S_1_1) & -one(S_2_1) & -one(S_4_1).
+one(S_4_1) -> -one(S_1_1) & -one(S_2_1) & -one(S_3_1).
+one(S_1_2) -> -one(S_2_2) & -one(S_3_2) & -one(S_4_2).
+one(S_2_2) -> -one(S_1_2) & -one(S_3_2) & -one(S_4_2).
+one(S_3_2) -> -one(S_1_2) & -one(S_2_2) & -one(S_4_2).
+one(S_4_2) -> -one(S_1_2) & -one(S_2_2) & -one(S_3_2).
+one(S_1_3) -> -one(S_2_3) & -one(S_3_3) & -one(S_4_3).
+one(S_2_3) -> -one(S_1_3) & -one(S_3_3) & -one(S_4_3).
+one(S_3_3) -> -one(S_1_3) & -one(S_2_3) & -one(S_4_3).
+one(S_4_3) -> -one(S_1_3) & -one(S_2_3) & -one(S_3_3).
+one(S_1_4) -> -one(S_2_4) & -one(S_3_4) & -one(S_4_4).
+one(S_2_4) -> -one(S_1_4) & -one(S_3_4) & -one(S_4_4).
+one(S_3_4) -> -one(S_1_4) & -one(S_2_4) & -one(S_4_4).
+one(S_4_4) -> -one(S_1_4) & -one(S_2_4) & -one(S_3_4).
+
+two(S_1_1) -> -two(S_2_1) & -two(S_3_1) & -two(S_4_1).
+two(S_2_1) -> -two(S_1_1) & -two(S_3_1) & -two(S_4_1).
+two(S_3_1) -> -two(S_1_1) & -two(S_2_1) & -two(S_4_1).
+two(S_4_1) -> -two(S_1_1) & -two(S_2_1) & -two(S_3_1).
+two(S_1_2) -> -two(S_2_2) & -two(S_3_2) & -two(S_4_2).
+two(S_2_2) -> -two(S_1_2) & -two(S_3_2) & -two(S_4_2).
+two(S_3_2) -> -two(S_1_2) & -two(S_2_2) & -two(S_4_2).
+two(S_4_2) -> -two(S_1_2) & -two(S_2_2) & -two(S_3_2).
+two(S_1_3) -> -two(S_2_3) & -two(S_3_3) & -two(S_4_3).
+two(S_2_3) -> -two(S_1_3) & -two(S_3_3) & -two(S_4_3).
+two(S_3_3) -> -two(S_1_3) & -two(S_2_3) & -two(S_4_3).
+two(S_4_3) -> -two(S_1_3) & -two(S_2_3) & -two(S_3_3).
+two(S_1_4) -> -two(S_2_4) & -two(S_3_4) & -two(S_4_4).
+two(S_2_4) -> -two(S_1_4) & -two(S_3_4) & -two(S_4_4).
+two(S_3_4) -> -two(S_1_4) & -two(S_2_4) & -two(S_4_4).
+two(S_4_4) -> -two(S_1_4) & -two(S_2_4) & -two(S_3_4).
+
+three(S_1_1) -> -three(S_2_1) & -three(S_3_1) & -three(S_4_1).
+three(S_2_1) -> -three(S_1_1) & -three(S_3_1) & -three(S_4_1).
+three(S_3_1) -> -three(S_1_1) & -three(S_2_1) & -three(S_4_1).
+three(S_4_1) -> -three(S_1_1) & -three(S_2_1) & -three(S_3_1).
+three(S_1_2) -> -three(S_2_2) & -three(S_3_2) & -three(S_4_2).
+three(S_2_2) -> -three(S_1_2) & -three(S_3_2) & -three(S_4_2).
+three(S_3_2) -> -three(S_1_2) & -three(S_2_2) & -three(S_4_2).
+three(S_4_2) -> -three(S_1_2) & -three(S_2_2) & -three(S_3_2).
+three(S_1_3) -> -three(S_2_3) & -three(S_3_3) & -three(S_4_3).
+three(S_2_3) -> -three(S_1_3) & -three(S_3_3) & -three(S_4_3).
+three(S_3_3) -> -three(S_1_3) & -three(S_2_3) & -three(S_4_3).
+three(S_4_3) -> -three(S_1_3) & -three(S_2_3) & -three(S_3_3).
+three(S_1_4) -> -three(S_2_4) & -three(S_3_4) & -three(S_4_4).
+three(S_2_4) -> -three(S_1_4) & -three(S_3_4) & -three(S_4_4).
+three(S_3_4) -> -three(S_1_4) & -three(S_2_4) & -three(S_4_4).
+three(S_4_4) -> -three(S_1_4) & -three(S_2_4) & -three(S_3_4).
+
+four(S_1_1) -> -four(S_2_1) & -four(S_3_1) & -four(S_4_1).
+four(S_2_1) -> -four(S_1_1) & -four(S_3_1) & -four(S_4_1).
+four(S_3_1) -> -four(S_1_1) & -four(S_2_1) & -four(S_4_1).
+four(S_4_1) -> -four(S_1_1) & -four(S_2_1) & -four(S_3_1).
+four(S_1_2) -> -four(S_2_2) & -four(S_3_2) & -four(S_4_2).
+four(S_2_2) -> -four(S_1_2) & -four(S_3_2) & -four(S_4_2).
+four(S_3_2) -> -four(S_1_2) & -four(S_2_2) & -four(S_4_2).
+four(S_4_2) -> -four(S_1_2) & -four(S_2_2) & -four(S_3_2).
+four(S_1_3) -> -four(S_2_3) & -four(S_3_3) & -four(S_4_3).
+four(S_2_3) -> -four(S_1_3) & -four(S_3_3) & -four(S_4_3).
+four(S_3_3) -> -four(S_1_3) & -four(S_2_3) & -four(S_4_3).
+four(S_4_3) -> -four(S_1_3) & -four(S_2_3) & -four(S_3_3).
+four(S_1_4) -> -four(S_2_4) & -four(S_3_4) & -four(S_4_4).
+four(S_2_4) -> -four(S_1_4) & -four(S_3_4) & -four(S_4_4).
+four(S_3_4) -> -four(S_1_4) & -four(S_2_4) & -four(S_4_4).
+four(S_4_4) -> -four(S_1_4) & -four(S_2_4) & -four(S_3_4).
+
+%Different digit on each square of a 2x2 grid
+%Square S_1_1, S_1_2, S_2_1, S_2_2
+one(S_1_1) -> -one(S_2_2) & -one(S_2_1) & -one(S_1_2).
+one(S_1_2) -> -one(S_2_1) & -one(S_1_1) & -one(S_2_2).
+one(S_2_1) -> -one(S_1_2) & -one(S_1_1) & -one(S_2_2).
+one(S_2_2) -> -one(S_1_1) & -one(S_1_2) & -one(S_2_1).
+two(S_1_1) -> -two(S_2_2) & -two(S_2_1) & -two(S_1_2).
+two(S_1_2) -> -two(S_2_1) & -two(S_1_1) & -two(S_2_2).
+two(S_2_1) -> -two(S_1_2) & -two(S_1_1) & -two(S_2_2).
+two(S_2_2) -> -two(S_1_1) & -two(S_2_1) & -two(S_1_2).
+three(S_1_1) -> -three(S_2_2) & -three(S_2_1) & -three(S_1_2).
+three(S_1_2) -> -three(S_2_1) & -three(S_1_1) & -three(S_2_2).
+three(S_2_1) -> -three(S_1_2) & -three(S_1_1) & -three(S_2_2).
+three(S_2_2) -> -three(S_1_1) & -three(S_2_1) & -three(S_1_2).
+four(S_1_1) -> -four(S_2_2) & -four(S_2_1) & -four(S_1_2).
+four(S_1_2) -> -four(S_2_1) & -four(S_1_1) & -four(S_2_2).
+four(S_2_1) -> -four(S_1_2) & -four(S_1_1) & -four(S_2_2).
+four(S_2_2) -> -four(S_1_1) & -four(S_2_1) & -four(S_1_2).
+
+%Square S_1_3, S_1_4, S_2_3, S_2_4
+one(S_1_3) -> -one(S_1_4) & -one(S_2_3) & -one(S_2_4).
+one(S_1_4) -> -one(S_2_3) & -one(S_1_3) & -one(S_2_4).
+one(S_2_3) -> -one(S_1_4) & -one(S_1_3) & -one(S_2_4).
+one(S_2_4) -> -one(S_1_3) & -one(S_1_4) & -one(S_2_3).
+two(S_1_3) -> -two(S_1_4) & -two(S_2_3) & -two(S_2_4).
+two(S_1_4) -> -two(S_2_3) & -two(S_1_3) & -two(S_2_4).
+two(S_2_3) -> -two(S_1_4) & -two(S_1_3) & -two(S_2_4).
+two(S_2_4) -> -two(S_1_3) & -two(S_1_4) & -two(S_2_3).
+three(S_1_3) -> -three(S_1_4) & -three(S_2_3) & -three(S_2_4).
+three(S_1_4) -> -three(S_2_3) & -three(S_1_3) & -three(S_2_4).
+three(S_2_3) -> -three(S_1_4) & -three(S_1_3) & -three(S_2_4).
+three(S_2_4) -> -three(S_1_3) & -three(S_1_4) & -three(S_2_3).
+four(S_1_3) -> -four(S_1_4) & -four(S_2_3) & -four(S_2_4).
+four(S_1_4) -> -four(S_2_3) & -four(S_1_3) & -four(S_2_4).
+four(S_2_3) -> -four(S_1_4) & -four(S_1_3) & -four(S_2_4).
+four(S_2_4) -> -four(S_1_3) & -four(S_1_4) & -four(S_2_3).
+
+%Square S_3_1, S_3_2, S_4_1, S_4_2
+one(S_3_1) -> -one(S_4_2) & -one(S_3_2) & -one(S_4_1).
+one(S_3_2) -> -one(S_4_1) & -one(S_3_1) & -one(S_4_2).
+one(S_4_1) -> -one(S_3_2) & -one(S_3_1) & -one(S_4_2).
+one(S_4_2) -> -one(S_3_1) & -one(S_3_2) & -one(S_4_1).
+two(S_3_1) -> -two(S_4_2) & -two(S_3_2) & -two(S_4_1).
+two(S_3_2) -> -two(S_4_1) & -two(S_3_1) & -two(S_4_2).
+two(S_4_1) -> -two(S_3_2) & -two(S_3_1) & -two(S_4_2).
+two(S_4_2) -> -two(S_3_1) & -two(S_3_2) & -two(S_4_1).
+three(S_3_1) -> -three(S_4_2) & -three(S_3_2) & -three(S_4_1).
+three(S_3_2) -> -three(S_4_1) & -three(S_3_1) & -three(S_4_2).
+three(S_4_1) -> -three(S_3_2) & -three(S_3_1) & -three(S_4_2).
+three(S_4_2) -> -three(S_3_1) & -three(S_3_2) & -three(S_4_1).
+four(S_3_1) -> -four(S_4_2) & -four(S_3_2) & -four(S_4_1).
+four(S_3_2) -> -four(S_4_1) & -four(S_3_1) & -four(S_4_2).
+four(S_4_1) -> -four(S_3_2) & -four(S_3_1) & -four(S_4_2).
+four(S_4_2) -> -four(S_3_1) & -four(S_3_2) & -four(S_4_1).
+
+%Square S_3_3, S_3_4, S_4_3, S_4_4
+one(S_3_3) -> -one(S_4_4) & -one(S_3_4) & -one(S_4_3).
+one(S_3_4) -> -one(S_4_3) & -one(S_3_3) & -one(S_4_4).
+one(S_4_3) -> -one(S_3_4) & -one(S_3_3) & -one(S_4_4).
+one(S_4_4) -> -one(S_3_3) & -one(S_3_4) & -one(S_4_3).
+two(S_3_3) -> -two(S_4_4) & -two(S_3_4) & -two(S_4_3).
+two(S_3_4) -> -two(S_4_3) & -two(S_3_3) & -two(S_4_4).
+two(S_4_3) -> -two(S_3_4) & -two(S_3_3) & -two(S_4_4).
+two(S_4_4) -> -two(S_3_3) & -two(S_3_4) & -two(S_4_3).
+three(S_3_3) -> -three(S_4_4) & -three(S_3_4) & -three(S_4_3).
+three(S_3_4) -> -three(S_4_3) & -three(S_3_3) & -three(S_4_4).
+three(S_4_3) -> -three(S_3_4) & -three(S_3_3) & -three(S_4_4).
+three(S_4_4) -> -three(S_3_3) & -three(S_3_4) & -three(S_4_3).
+four(S_3_3) -> -four(S_4_4) & -four(S_3_4) & -four(S_4_3).
+four(S_3_4) -> -four(S_4_3) & -four(S_3_3) & -four(S_4_4).
+four(S_4_3) -> -four(S_3_4) & -four(S_3_3) & -four(S_4_4).
+four(S_4_4) -> -four(S_3_3) & -four(S_3_4) & -four(S_4_3).
+
+%Configuration
+one(S_1_1).
+three(S_1_3).
+three(S_2_2).
+two(S_2_3).
+two(S_3_1).
+four(S_3_3).
+four(S_4_2).
+two(S_4_4).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+
